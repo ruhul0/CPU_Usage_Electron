@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <!-- <script> src="./index.js" </script> -->
+    <!-- <script defer src="./render.js"></script> -->
+  </head>
+  <body>
+    <!-- <h1>💖 Hello World!</h1>
+    <p>Welcome to your Electron application.</p> -->
+    <div class="box">
+      <span class="label">CPU (%)</span>
+      <span id="cpu">-</span>
+    </div>
+    <div class="box">
+      <span class="label">Free Memory (%)</span>
+      <span id="mem">-</span>
+    </div>
+    <div class="box">
+      <span class="label">Total Memory (GB))</span>
+      <span id="total-mem">-</span>
+    </div>
+    <script>
+      const electron = require('electron');
+      const ipcRenderer = electron.ipcRenderer;
+
+      ipcRenderer.on('cpu',(event,data) => {
+        document.getElementById('cpu').innerHTML = data.toFixed(2);
+        console.log('cpu % ' + data);
+      })
+      ipcRenderer.on('mem',(event,data) => {
+        document.getElementById('mem').innerHTML = data.toFixed(2);
+        console.log('mem % ' + data);
+      })
+      ipcRenderer.on('total-mem',(event,data) => {
+        document.getElementById('total-mem').innerHTML = data.toFixed(2);
+        console.log('total memory gb % ' + data);
+      })
+    </script>
+  </body>
+</html>
